@@ -18,6 +18,8 @@ def countdown(t):
         t -= 1
 
 def main():
+    simp_called = False  # Flag to track if a function in simp module is called
+    
     while True:
         print("\nChoose a function to use:")
         print("1. Add two numbers")
@@ -33,15 +35,18 @@ def main():
             num1 = int(input("Enter the first number: "))
             num2 = int(input("Enter the second number: "))
             print(f"The sum is: {add_numbers(num1, num2)}")
+            simp_called = True
 
         elif choice == '2':
             num1 = int(input("Enter the first number: "))
             num2 = int(input("Enter the second number: "))
             print(f"The difference is: {subtract_numbers(num1, num2)}")
+            simp_called = True
 
         elif choice == '3':
             num = int(input("Enter a number: "))
             print(f"The sum of digits is: {sumofdigits(num)}")
+            simp_called = True
 
         elif choice == '4':
             num = int(input("Enter a number: "))
@@ -49,16 +54,20 @@ def main():
                 print(f"{num} is a palindrome.")
             else:
                 print(f"{num} is not a palindrome.")
+            simp_called = True
 
         elif choice == '5':
             list1 = input("Enter the first list (comma-separated): ").split(',')
             list2 = input("Enter the second list (comma-separated): ").split(',')
             print(f"The zipped list is: {myzip(list1, list2)}")
+            simp_called = True
 
         elif choice == '6':
+            if not simp_called:  # Check if a function in simp module was called
+                raise Exception("Cannot call functions in comp module without calling at least one function in simp module.")
+
             print("Exiting...")
             countdown(3)
-
             break
 
         else:
@@ -67,13 +76,11 @@ def main():
             countdown(3)
             clear_screen()
 
-        # Add a continue option
         cont = input("\nDo you wish to continue? (yes/no): ")
         if cont.lower() != 'yes':
             print("Exiting...")
             countdown(3)
             break
-
 
 if __name__ == "__main__":
     clear_screen()
